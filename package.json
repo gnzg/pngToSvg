@@ -1,0 +1,31 @@
+{
+  "name": "pixel2node2svg",
+  "version": "1.0.0",
+  "description": "Convert a PNG/JPG image into an SVG graphic.",
+  "main": "index.js",
+  "dependencies": {
+    "pixel": "^0.0.4",
+    "pixel-to-svg": "0.0.0",
+    "prompt": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "gnzg",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gnzg/pixel2node2svg.git"
+  },
+  "keywords": [
+    "image",
+    "conversion",
+    "svg",
+    "node.js"
+  ],
+  "bugs": {
+    "url": "https://github.com/gnzg/pixel2node2svg/issues"
+  },
+  "homepage": "https://github.com/gnzg/pixel2node2svg#readme"
+}
