@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testing Ground</title>
+    <style>
+        object {
+            position: absolute;
+            top:0;
+            left:0;
+        }
+    </style>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            document.querySelector("#svgPic").getSVGDocument().getElementById('background_top').classList.add('back01');
+            document.querySelector("#svgPic").getSVGDocument().getElementById('background_mid').classList.add('back02');
+            document.querySelector("#svgPic").getSVGDocument().getElementById('background_bot').classList.add('back03')
+            document.querySelector("#svgPic-animated").getSVGDocument().getElementById('foreground').classList.add('back01');
+            var i = 0;
+
+
+            //frame by frame animation
+            /* setInterval(function () {
+                document.querySelector('#bush-wrapper #black-bush-animated').style.left = -i*96 +"px";
+                i++;
+                if (i==2) i = 0;
+            },63); */
+
+                // fluent animation
+            setInterval(function () {
+                i--;
+                document.querySelector('#bush-wrapper #black-bush-animated').style.left = i +"px";
+                if (i==-192) i = 0;
+            },63);
+
+        });
+    </script>
+</head>
+<body style="background:#333;">
+
+<div id="svg-wrapper" style="transform: scale(5); position:relative; width:96px; height:96px; margin:0 auto; margin-top:250px;">
+    <object id="svgPic" type="image/svg+xml" data="cora.svg"></object>
+
+    <div id="bush-wrapper" style="position:absolute; top:0; left:0; width:96px; height:96px; overflow:hidden;">
+        <div id="black-bush-animated" style="position:absolute; top:7px; left:0; width:192px; height:96px;">
+            <object id="svgPic-animated" type="image/svg+xml" data="cora-f0.svg"></object>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
