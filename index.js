@@ -17,14 +17,21 @@ prompt.get(['fileName'], function (err = null, result) {
 
         pixel.parse('./' + result.fileName)
             .then(function (images) {
-                /*console.log(svg.convert(images[0]));*/
+                /* console.log(svg.convert(images[0])); */
                 me.convertedSVG = svg.convert(images[0]);
-                console.log(me.convertedSVG);
+                //console.log(me.convertedSVG);
 
-                /* create new file name for the svg file*/
+                /* create new file name for the svg file */
                 var newName = result.fileName;
                 newName = newName.replace(/\.png/g, '').replace(/\.jpg/g, '');
-                console.log(newName);
+                //console.log(newName);
+
+                /* appends a unique id to every path element */
+                var counter = 0;
+                me.convertedSVG = me.convertedSVG.replace(/<path/g, function() {
+                    counter++;
+                    return "<path id="+"'"+newName+"-"+counter+"'";
+                });
 
                 fs.writeFile("./" + newName + ".svg", me.convertedSVG, function (err) {
                     if (err) {
