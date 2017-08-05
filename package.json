@@ -4,6 +4,7 @@
   "description": "Convert a PNG/JPG image into an SVG graphic.",
   "main": "index.js",
   "dependencies": {
+    "node-dir": "^0.1.17",
     "pixel": "^0.0.4",
     "pixel-to-svg": "0.0.0",
     "prompt": "^1.0.0"
