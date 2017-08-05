@@ -23,14 +23,23 @@ filteredFiles.forEach(function(item, index ) {
 
         pixel.parse('./' + item)
             .then(function (images) {
-                /*console.log(svg.convert(images[0]));*/
+
+                /* save converted data in global var */
                 me.convertedSVG = svg.convert(images[0]);
                 //console.log(me.convertedSVG);
 
-                /* create new file name for the svg file*/
+                /* create new file name for the svg file */
                 var newName = item;
                 newName = item.replace(/\.png/g, '').replace(/\.jpg/g, '');
                 console.log(item + " has been converted.");
+
+                /* appends a unique id to every path element */
+                var counter = 0;
+                me.convertedSVG = me.convertedSVG.replace(/<path/g, function() {
+                    counter++;
+                    return "<path id="+"'"+newName+"-"+counter+"'";
+                });
+
 
                 fs.writeFile("./" + newName + ".svg", me.convertedSVG, function (err) {
                     if (err) {
