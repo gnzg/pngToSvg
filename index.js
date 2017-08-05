@@ -13,13 +13,18 @@ var files = dir.files(__dirname, {sync:true, recursive:false});
 var filteredFiles = files.filter(function(legitFile) {
     return legitFile.match( /(png|jpg)/ );
 });
-// filter for actual file name, not file path
-filteredFiles.forEach(function (item, index) {
-    filteredFiles[index] = item.substring(item.lastIndexOf("/") + 1);
-});
-console.log("Found these guys: " + filteredFiles);
 
-filteredFiles.forEach(function(item, index ) {
+
+/* If no files found, output status */
+if (filteredFiles.length > 0) {
+
+// filter for actual file name, not file path
+    filteredFiles.forEach(function (item, index) {
+        filteredFiles[index] = item.substring(item.lastIndexOf("/") + 1);
+    });
+    console.log("Found these guys: " + filteredFiles);
+
+    filteredFiles.forEach(function (item, index) {
 
         pixel.parse('./' + item)
             .then(function (images) {
@@ -35,9 +40,9 @@ filteredFiles.forEach(function(item, index ) {
 
                 /* appends a unique id to every path element */
                 var counter = 0;
-                me.convertedSVG = me.convertedSVG.replace(/<path/g, function() {
+                me.convertedSVG = me.convertedSVG.replace(/<path/g, function () {
                     counter++;
-                    return "<path id="+"'"+newName+"-"+counter+"'";
+                    return "<path id=" + "'" + newName + "-" + counter + "'";
                 });
 
 
@@ -48,4 +53,7 @@ filteredFiles.forEach(function(item, index ) {
 
                 });
             });
-});
+    });
+} else {
+    console.log('No appropriate files found.');
+}
