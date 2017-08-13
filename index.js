@@ -36,7 +36,34 @@ if (filteredFiles.length > 0) {
                 /* create new file name for the svg file */
                 var newName = item;
                 newName = item.replace(/\.png/g, '').replace(/\.jpg/g, '');
-                console.log(item + " has been converted.");
+
+                // save file metadata before going further to retrieve it later
+                var tempMetadata = me.convertedSVG.substring(0, me.convertedSVG.indexOf('<g>')+3);
+                //console.log(tempMetadata);
+
+                console.log("looking for empty paths...\n");
+                // create an array of paths to filter out the empty paths
+                var pathArray = me.convertedSVG.split("<path");
+                //console.log(pathArray);
+                // keep only paths with FULL alpha channel values
+                pathArray = pathArray.filter(function(path) {
+                    return path.indexOf(',0)"') === -1;
+                });
+                //console.log(pathArray);
+
+                pathArray.forEach(function(item, index) {
+                    /* this ridiculous if statement is necessary to avoid appending "<path" to the metadata */
+                    if (index < pathArray.length-1) {
+                    pathArray[index+1] =  "<path" + pathArray[index+1];
+                    }
+                });
+                // at this point the SVG is clean of 'empty' paths, but now needs to be pieced up together
+                //console.log(pathArray);
+                me.convertedSVG = pathArray.join('');
+
+                /* Make sure there is a closing tag */
+                me.convertedSVG += (me.convertedSVG.indexOf("</g></svg>") === -1) ? "</g></svg>" : "";
+                console.log("look at this shiny new SVG! \n" + me.convertedSVG);
 
                 /* appends a unique id to every path element */
                 var counter = 0;
@@ -50,8 +77,8 @@ if (filteredFiles.length > 0) {
                     if (err) {
                         return console.log(err);
                     }
-
                 });
+                console.log(item + " has been converted.");
             });
     });
 } else {

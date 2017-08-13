@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Testing Ground</title>
+    <style>
+        .animation-basic {
+            animation-name: aniExp;
+            animation-duration: 4s;
+            animation-iteration-count: 1;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes aniExp {
+            0% { filter: hue-rotate(0deg); }
+            50% { brightness(2)}
+            100% { filter: hue-rotate(185deg) brightness(2) saturate(2); }
+        }
+
+        .svgasset {
+            position: absolute;
+            top:0px;
+            left:0px;
+        }
+
+        .delay-2sec {
+            animation-delay: 0.5s;
+        }
+
+        .delay-4sec {
+            animation-delay: 1s;
+        }
+
+        .delay-6sec {
+            animation-delay: 1.5s;
+        }
+
+        .delay-8sec {
+            animation-delay: 2s;
+        }
+
+        .delay-10sec {
+            animation-delay: 2.1s;
+        }
+
+    </style>
+    <script>
+
+        document.addEventListener("DOMContentLoaded",function(){function e(e,a,s){var n=new XMLHttpRequest;n.open("GET",e),n.setRequestHeader("Content-Type","image/svg+xml"),n.addEventListener("load",function(e){var n=e.target.responseText,c=new DOMParser,t=c.parseFromString(n,"image/svg+xml");graphic='<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" shape-rendering="crispEdges" width="160" height="96" viewBox="0 0 160 96">'+t.getElementsByTagName("svg")[0].innerHTML+"</svg>",console.log(graphic);var i=document.createElement("div");i.id=a,i.className=s,document.querySelector("#scene-wrapper").appendChild(i),document.querySelector("#"+a).innerHTML=graphic}),n.send()}e("logo_cora_0011_Layer-2.svg","back1","svgasset"),e("logo_cora_0010_Layer-7.svg","back2","svgasset"),e("logo_cora_0007_Layer-5.svg","back3","svgasset"),e("logo_cora_0004_Layer-1.svg","back4","svgasset"),e("logo_cora_0002_Layer-4.svg","back5","svgasset"),e("logo_cora_0006_Layer-6.svg","back6","svgasset"),e("logo_cora_0000_stars.svg","stars","svgasset"),e("logo_cora_w.svg","logo","svgasset"),setTimeout(function(){document.getElementById("stars").children[0].children[0].children[0].classList.add("animation-basic"),document.getElementById("back1").children[0].children[0].children[0].classList.add("animation-basic","delay-4sec"),document.getElementById("back2").children[0].children[0].children[0].classList.add("animation-basic"),document.getElementById("back3").children[0].children[0].children[0].classList.add("animation-basic","delay-6sec"),document.getElementById("back4").children[0].children[0].children[0].classList.add("animation-basic","delay-8sec"),document.getElementById("back5").children[0].children[0].children[0].classList.add("animation-basic","delay-2sec"),document.getElementById("back6").children[0].children[0].children[0].classList.add("animation-basic","delay-10sec")},3e3)});
+    </script>
+</head>
+<body style="background:#333;">
+
+<div id="scene-wrapper" style="transform: scale(3); position:relative; width:160px; height:96px; margin:0 auto; margin-top:150px;"></div>
+
+</body>
+</html>
