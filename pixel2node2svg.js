@@ -4,7 +4,7 @@ fs = require('fs'),
 me = this,
 dir = require('node-dir'),
 SVGO = require('svgo'),
-svgo = new SVGO(/*{ custom config object }*/);
+svgo = new SVGO();
 
 var files = dir.files(__dirname, {sync:true, recursive:false});
 //console.log(files);
@@ -30,13 +30,14 @@ if (filteredFiles.length > 0) {
         pixel.parse('./' + item)
             .then(function (images) {
 
-                console.log("Starting conversion...");
+                console.log("Converting "+item+"...");
 
                 /* save converted data in global var */
                 me.convertedSVG = svg.convert(images[0]);
                 //console.log(me.convertedSVG);
 
                 // optimize converted file via svgo
+                // to compare file size reduction comment the following three lines out and run pixel2node2svg
                 svgo.optimize(me.convertedSVG, function(result) {
                    me.convertedSVG = result.data;
                 });
