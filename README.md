@@ -10,9 +10,5 @@ In terms of file size reduction, naive test runs point at the fact that the best
 
 ## Use
 
-``` 
-node pixel2node2svg.js
-// Enter image name, e.g. test-0.png
-// Conversion will now take place, if the file exists
-// Output to file system: test-0.svg
-```
+Navigate to the project root and place your png/jpg files there. Then, run ``` node pixel2node2svg.js```. Conversion will now take place, if appropriate files exist.
+
