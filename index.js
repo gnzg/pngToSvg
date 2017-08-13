@@ -30,6 +30,8 @@ if (filteredFiles.length > 0) {
         pixel.parse('./' + item)
             .then(function (images) {
 
+                console.log("Starting conversion...");
+
                 /* save converted data in global var */
                 me.convertedSVG = svg.convert(images[0]);
                 //console.log(me.convertedSVG);
@@ -47,7 +49,7 @@ if (filteredFiles.length > 0) {
                 //var tempMetadata = me.convertedSVG.substring(0, me.convertedSVG.indexOf('<g>')+3);
                 //console.log(tempMetadata);
 
-                console.log("looking for empty paths...\n");
+                console.log("Looking for empty paths...");
                 // create an array of paths to filter out the empty paths
                 var pathArray = me.convertedSVG.split("<path");
                 //console.log(pathArray);
@@ -69,7 +71,7 @@ if (filteredFiles.length > 0) {
 
                 /* Make sure there is a closing tag */
                 me.convertedSVG += (me.convertedSVG.indexOf("</svg>") === -1) ? "</svg>" : "";
-                console.log("look at this shiny new SVG! \n" + me.convertedSVG);
+                //console.log("look at this shiny new SVG! \n" + me.convertedSVG);
 
                 /* appends a unique id to every path element */
                 var counter = 0;
