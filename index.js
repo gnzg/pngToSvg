@@ -1,9 +1,10 @@
-var pixel = require('pixel');
-var svg = require('pixel-to-svg');
-var fs = require('fs');
-var me = this;
-var dir = require('node-dir');
-
+var pixel = require('pixel'),
+svg = require('pixel-to-svg'),
+fs = require('fs'),
+me = this,
+dir = require('node-dir'),
+SVGO = require('svgo'),
+svgo = new SVGO(/*{ custom config object }*/);
 
 var files = dir.files(__dirname, {sync:true, recursive:false});
 //console.log(files);
@@ -33,12 +34,17 @@ if (filteredFiles.length > 0) {
                 me.convertedSVG = svg.convert(images[0]);
                 //console.log(me.convertedSVG);
 
+                // optimize converted file via svgo
+                svgo.optimize(me.convertedSVG, function(result) {
+                   me.convertedSVG = result.data;
+                });
+
                 /* create new file name for the svg file */
                 var newName = item;
                 newName = item.replace(/\.png/g, '').replace(/\.jpg/g, '');
 
                 // save file metadata before going further to retrieve it later
-                var tempMetadata = me.convertedSVG.substring(0, me.convertedSVG.indexOf('<g>')+3);
+                //var tempMetadata = me.convertedSVG.substring(0, me.convertedSVG.indexOf('<g>')+3);
                 //console.log(tempMetadata);
 
                 console.log("looking for empty paths...\n");
@@ -62,7 +68,7 @@ if (filteredFiles.length > 0) {
                 me.convertedSVG = pathArray.join('');
 
                 /* Make sure there is a closing tag */
-                me.convertedSVG += (me.convertedSVG.indexOf("</g></svg>") === -1) ? "</g></svg>" : "";
+                me.convertedSVG += (me.convertedSVG.indexOf("</svg>") === -1) ? "</svg>" : "";
                 console.log("look at this shiny new SVG! \n" + me.convertedSVG);
 
                 /* appends a unique id to every path element */
