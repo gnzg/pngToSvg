@@ -2,7 +2,7 @@
 
 An adapatation of 59naga's pixel-to-svg project. Check it out here https://github.com/59naga/pixel-to-svg
 
-While the original converts PNG and JPG images to SVG path data, this project saves you time by instantly creating an SVG file from the converted data.
+While the original converts PNG and JPG images to SVG path data, this project saves you time by instantly creating an SVG file from the converted data. It also performs out of the box SVG optimization via svgo.
 
 ## Use
 
