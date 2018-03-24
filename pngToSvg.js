@@ -1,13 +1,29 @@
-var pixel = require('pixel'),
-svg = require('pixel-to-svg'),
-fs = require('fs'),
-me = this,
-dir = require('node-dir'),
-SVGO = require('svgo'),
-svgo = new SVGO();
+const pixel = require('pixel');
+const svg = require('pixel-to-svg');
+const fs = require('fs');
+const me = this;
+const dir = require('node-dir');
+const SVGO = require('svgo');
+const svgo = new SVGO();
+const readline = require('readline');
 
-var files = dir.files(__dirname, {sync:true, recursive:false});
-//console.log(files);
+var files;
+var directoryOfPngs;
+
+// provide option to target folder with PNGs
+// via process.argv
+// val should be provided as an absolute path
+process.argv.forEach(function (val, index, array) {
+  console.log(index + ': ' + val);
+  // array[2] is the reference to the passed target folder
+  directoryOfPngs = array.length === 3 ? array[2] : __dirname;
+//  files = dir.files(directoryOfPngs, {sync:true, recursive:false});
+  files = dir.files(directoryOfPngs, {sync:true, recursive:false});
+
+  // See number of arguments
+  // if (index === array.length-1) console.log('argument length is', array.length);
+});
+
 
 
 // filters file array and returns an array of ONLY the png files
