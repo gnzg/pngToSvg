@@ -1,4 +1,4 @@
-# pixel2node2svg
+# pngToSvg
 
 An adapatation of 59naga's pixel-to-svg project.
 
