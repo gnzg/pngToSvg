@@ -14,7 +14,7 @@ var directoryOfPngs;
 // via process.argv
 // val should be provided as an absolute path
 process.argv.forEach(function (val, index, array) {
-  console.log(index + ': ' + val);
+  //console.log(index + ': ' + val);
   // array[2] is the reference to the passed target folder
   directoryOfPngs = array.length === 3 ? array[2] : __dirname;
 //  files = dir.files(directoryOfPngs, {sync:true, recursive:false});
@@ -43,7 +43,7 @@ if (filteredFiles.length > 0) {
 
     filteredFiles.forEach(function (item, index) {
 
-        pixel.parse('./' + item)
+        pixel.parse(directoryOfPngs + item)
             .then(function (images) {
 
                 console.log("Converting "+item+"...");
@@ -98,7 +98,7 @@ if (filteredFiles.length > 0) {
                 });
 
 
-                fs.writeFile("./" + newName + ".svg", me.convertedSVG, function (err) {
+                fs.writeFile(directoryOfPngs + newName + ".svg", me.convertedSVG, function (err) {
                     if (err) {
                         return console.log(err);
                     }
